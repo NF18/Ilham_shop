@@ -1,0 +1,461 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Apdooy Shop - Pembayaran</title>
+
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: Arial;
+      }
+
+      body {
+        background: #f5f5f5;
+      }
+
+      header {
+        height: 70px;
+
+
+        nav {
+          display: flex;
+          gap: 20px;
+        }
+
+        nav a {
+          text-decoration: none;
+          color: #333;
+          font-size: 16px;
+        }
+
+        nav a:hover {
+          color: #c48728;
+        }
+        background: white;
+
+        display: flex;
+
+        align-items: center;
+
+        justify-content: space-between;
+
+        padding: 0 40px;
+
+        position: sticky;
+
+        top: 0;
+
+        border-radius: 0 0 20px 20px;
+      }
+
+      .logo {
+        font-size: 25px;
+
+        font-weight: bold;
+      }
+
+      nav a {
+        text-decoration: none;
+
+        margin: 0 15px;
+
+        color: #333;
+      }
+
+      .container {
+        width: 90%;
+
+        margin: auto;
+
+        padding: 40px;
+      }
+
+      .membeli-box {
+        background: white;
+
+        padding: 30px;
+
+        border-radius: 20px;
+
+        box-shadow: 0 10px 30px #ddd;
+      }
+
+      .product-buy {
+        display: flex;
+
+        justify-content: space-between;
+
+        align-items: center;
+
+        padding: 15px;
+
+        border-bottom: 1px solid #ddd;
+      }
+
+      .qty-controls {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        padding: 4px 8px;
+        border: 1px solid #e6d9ce;
+        border-radius: 14px;
+        background: #faf4ec;
+      }
+
+      .qty-controls button {
+        width: 34px;
+        height: 34px;
+        border: 1px solid #c48728;
+        background: white;
+        color: #c48728;
+        font-size: 18px;
+        border-radius: 8px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        transition: background 0.2s, color 0.2s, transform 0.2s;
+      }
+
+      .qty-controls button:hover {
+        background: #c48728;
+        color: white;
+        border-color: #c48728;
+        transform: translateY(-1px);
+      }
+
+      .qty-controls span {
+        min-width: 30px;
+        padding: 2px 4px;
+        text-align: center;
+        font-weight: bold;
+        background: white;
+        border-radius: 8px;
+      }
+
+      .item-total {
+        font-weight: 700;
+        color: #4a3728;
+      }
+
+      .product-buy span {
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+      }
+
+      .delete-button {
+        background: transparent;
+        border: 1px solid #c48728;
+        color: #c48728;
+        border-radius: 10px;
+        padding: 8px 12px;
+        cursor: pointer;
+        transition:
+          background 0.2s,
+          color 0.2s;
+      }
+
+      .delete-button:hover {
+        background: #c48728;
+        color: white;
+      }
+
+      .total {
+        font-size: 25px;
+
+        color: #c48728;
+
+        margin: 25px 0;
+      }
+
+      .payment {
+        display: grid;
+
+        grid-template-columns: repeat(4, 1fr);
+
+        gap: 20px;
+      }
+
+      .method {
+        background: #fff;
+
+        padding: 20px;
+
+        border-radius: 15px;
+
+        cursor: pointer;
+
+        text-align: center;
+
+        transition: 0.3s;
+
+        border: 2px solid transparent;
+      }
+
+      .method:hover {
+        transform: translateY(-10px);
+
+        border: 2px solid #c48728;
+      }
+
+      .method img {
+        width: 70px;
+
+        height: 50px;
+
+        object-fit: contain;
+      }
+
+      button {
+        width: 100%;
+
+        padding: 15px;
+
+        background: #c48728;
+
+        color: white;
+
+        border: none;
+
+        border-radius: 15px;
+
+        margin-top: 30px;
+
+        cursor: pointer;
+      }
+      .cart-notif {
+        position: fixed;
+        top: 90px;
+        right: 20px;
+        background: #c48728;
+        color: white;
+        padding: 14px 20px;
+        border-radius: 14px;
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+        display: none;
+        z-index: 999;
+      }
+    </style>
+  </head>
+
+  <body>
+    <header>
+      <div class="logo">Apdooy Shop</div>
+       <nav>
+         <a href="index.html">Beranda</a>
+         <a href="s.html">Shop</a>
+         <a href="blog.html">Blog</a>
+         <a href="Contact.html">Contact</a>
+         <a href="Membeli.html">Keranjang</a>
+       </nav>
+    </header>
+
+    <div class="container">
+      <div class="membeli-box">
+        <h1>Pembelian</h1>
+
+        <div class="cart-notif" id="cartNotif">Produk berhasil ditambahkan ke keranjang</div>
+
+        <br />
+
+        <div id="listBeli"></div>
+
+        <h2 class="total">
+          Total :
+          <span id="total"> 0 </span>
+        </h2>
+
+        <h2>Metode Pembayaran</h2>
+
+        <br />
+
+        <div class="payment">
+          <div class="method">
+            💵
+
+            <h3>Tunai</h3>
+
+            <p>Cash</p>
+          </div>
+
+          <div class="method">
+            🚚
+
+            <h3>COD</h3>
+
+            <p>Bayar ditempat</p>
+          </div>
+
+          <div class="method">
+            🏦
+
+            <h3>Transfer Bank</h3>
+
+            <p>BCA Mandiri BRI</p>
+          </div>
+
+          <div class="method">
+            📱
+
+            <h3>QRIS</h3>
+
+            <p>Scan QR</p>
+          </div>
+
+          <div class="method">
+            <img
+              src="https://upload.wikimedia.org/wikipedia/commons/8/86/Gopay_logo.svg"
+            />
+
+            <h3>GoPay</h3>
+          </div>
+
+          <div class="method">
+            DANA
+
+            <h3>DANA</h3>
+          </div>
+
+          <div class="method">
+            OVO
+
+            <h3>OVO</h3>
+          </div>
+
+          <div class="method">
+            ShopeePay
+
+            <h3>ShopeePay</h3>
+          </div>
+
+          <div class="method">
+            VA
+
+            <h3>Virtual Account</h3>
+          </div>
+
+          <div class="method">
+            💳
+
+            <h3>Debit/Kredit</h3>
+          </div>
+
+          <div class="method">
+            💳
+
+            <h3>E-Money</h3>
+          </div>
+
+          <div class="method">
+            ⏳
+
+            <h3>PayLater</h3>
+          </div>
+
+          <div class="method">
+            🏪
+
+            <h3>Indomaret</h3>
+          </div>
+
+          <div class="method">
+            🏪
+
+            <h3>Alfamart</h3>
+          </div>
+        </div>
+
+        <button onclick="bayar()">Bayar Sekarang</button>
+      </div>
+    </div>
+
+    <script>
+      let cart = JSON.parse(localStorage.getItem("cart")) || [];
+
+      function renderCart() {
+        let total = 0;
+        let tampil = "";
+
+        cart.forEach((item, index) => {
+          const itemTotal = item.harga * item.qty;
+          total += itemTotal;
+
+          tampil += `
+          <div class="product-buy">
+            <b>${item.nama}</b>
+            <span>
+              <span class="qty-controls">
+                <button onclick="changeQty(${index}, -1)">-</button>
+                <span>${item.qty}</span>
+                <button onclick="changeQty(${index}, 1)">+</button>
+              </span>
+              RP ${item.harga.toLocaleString("id-ID")} / pcs
+              <span class="item-total">RP ${itemTotal.toLocaleString("id-ID")}</span>
+              <button class="delete-button" onclick="hapusItem(${index})">Hapus</button>
+            </span>
+          </div>
+          `;
+        });
+
+        if (cart.length === 0) {
+          tampil = "<p>Keranjang kosong.</p>";
+        }
+
+        document.getElementById("listBeli").innerHTML = tampil;
+        document.getElementById("total").innerHTML =
+          cart.length > 0 ? "RP " + total.toLocaleString("id-ID") : "0";
+      }
+
+      function changeQty(index, delta) {
+        const item = cart[index];
+        if (!item) return;
+        item.qty += delta;
+        if (item.qty <= 0) {
+          cart.splice(index, 1);
+        }
+        localStorage.setItem("cart", JSON.stringify(cart));
+        renderCart();
+      }
+
+      function hapusItem(index) {
+        cart.splice(index, 1);
+        localStorage.setItem("cart", JSON.stringify(cart));
+        renderCart();
+      }
+
+      function bayar() {
+        if (cart.length === 0) {
+          alert("Keranjang kosong, tidak ada yang bisa dibayar.");
+          return;
+        }
+
+        alert("Pembayaran berhasil diproses di Apdooy Shop");
+        cart = [];
+        localStorage.setItem("cart", JSON.stringify(cart));
+        renderCart();
+      }
+
+      function showCartNotif(message) {
+        const notif = document.getElementById("cartNotif");
+        notif.textContent = message;
+        notif.style.display = "block";
+        setTimeout(() => {
+          notif.style.display = "none";
+        }, 2500);
+      }
+
+      const cartNotifFlag = localStorage.getItem("cartNotif");
+      if (cartNotifFlag === "added") {
+        showCartNotif("✅ Produk berhasil ditambahkan ke keranjang");
+        localStorage.removeItem("cartNotif");
+      }
+
+      renderCart();
+    </script>
+  </body>
+</html>

@@ -1,0 +1,348 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
+}
+
+:root {
+  --cream: #f7f3ed;
+  --beige: #e8dccb;
+  --brown: #7c6654;
+  --dark: #3f352d;
+  --white: #ffffff;
+}
+
+body {
+  background: var(--cream);
+  overflow-x: hidden;
+}
+
+/* NAVBAR */
+
+.navbar {
+  height: 90px;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  padding: 0 8%;
+
+  position: absolute;
+  width: 100%;
+  z-index: 100;
+}
+
+.logo {
+  font-size: 32px;
+  font-weight: 700;
+
+  color: white;
+}
+
+.navbar ul {
+  display: flex;
+  gap: 40px;
+
+  list-style: none;
+}
+
+.navbar a {
+  text-decoration: none;
+  color: white;
+  font-weight: 500;
+}
+
+.btn-shop {
+  background: rgba(255, 255, 255, 0.2);
+
+  padding: 12px 22px;
+
+  border-radius: 30px;
+
+  backdrop-filter: blur(10px);
+}
+
+.btn-koleksi {
+  display: inline-block;
+  padding: 12px 25px;
+  background: #8b6f47;
+  color: white;
+  text-decoration: none;
+  border-radius: 30px;
+  font-weight: bold;
+}
+/* HERO */
+
+.hero {
+  height: 100vh;
+
+  background: url("aset/gambarhero.png");
+
+  background-size: cover;
+  background-position: center;
+
+  position: relative;
+
+  display: flex;
+  align-items: center;
+}
+
+.overlay {
+  position: absolute;
+  inset: 0;
+
+  background: rgba(0, 0, 0, 0.15);
+}
+
+.hero-content {
+  position: relative;
+  z-index: 2;
+
+  width: 38.2%;
+
+  margin-left: 8%;
+}
+
+.badge {
+  background: white;
+
+  padding: 8px 16px;
+
+  border-radius: 20px;
+
+  color: var(--brown);
+
+  font-size: 14px;
+}
+
+.hero h1 {
+  font-size: 72px;
+
+  line-height: 1.1;
+
+  margin: 25px 0;
+
+  color: white;
+}
+
+.hero p {
+  color: white;
+
+  font-size: 18px;
+
+  line-height: 1.8;
+
+  margin-bottom: 30px;
+}
+
+.hero button {
+  padding: 16px 35px;
+
+  border: none;
+
+  border-radius: 40px;
+
+  background: var(--brown);
+
+  color: white;
+
+  cursor: pointer;
+
+  transition: 0.4s;
+}
+
+.hero button:hover {
+  transform: translateY(-4px);
+}
+
+/* STORE */
+
+.store {
+  padding: 120px 8%;
+}
+
+.section-title {
+  text-align: center;
+  margin-bottom: 60px;
+}
+
+.section-title h2 {
+  font-size: 48px;
+
+  color: var(--dark);
+}
+
+.section-title p {
+  color: #666;
+  margin-top: 10px;
+}
+
+.product-grid {
+  display: grid;
+
+  grid-template-columns: repeat(3, 1fr);
+
+  gap: 30px;
+}
+
+.card {
+  background: white;
+
+  border-radius: 25px;
+
+  overflow: hidden;
+
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.08);
+
+  transition: 0.5s;
+}
+
+.card:hover {
+  transform: translateY(-10px);
+}
+
+.card img {
+  width: 100%;
+  height: 380px;
+
+  object-fit: cover;
+}
+
+.card h3 {
+  padding: 20px 20px 10px;
+}
+
+.card p {
+  padding: 0 20px;
+  color: #777;
+}
+
+.card span {
+  display: block;
+
+  padding: 15px 20px;
+
+  font-size: 24px;
+  font-weight: 700;
+
+  color: var(--brown);
+}
+
+.card button {
+  margin: 0 20px 20px;
+
+  width: calc(100% - 40px);
+
+  padding: 14px;
+
+  border: none;
+
+  border-radius: 30px;
+
+  background: var(--brown);
+
+  color: white;
+  cursor: pointer;
+}
+.reveal {
+  opacity: 0;
+  transform: translateY(50px);
+
+  transition: 1s;
+}
+
+.reveal.active {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+@media (max-width: 900px) {
+  .navbar {
+    padding: 0 5%;
+  }
+
+  .navbar ul {
+    gap: 20px;
+  }
+
+  .hero {
+    height: auto;
+    padding: 100px 0 80px;
+  }
+
+  .hero-content {
+    width: 90%;
+    margin-left: 5%;
+  }
+
+  .hero h1 {
+    font-size: 48px;
+  }
+
+  .hero p {
+    font-size: 16px;
+  }
+
+  .store {
+    padding: 80px 5%;
+  }
+
+  .product-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .card img {
+    height: 320px;
+  }
+}
+
+@media (max-width: 600px) {
+  .navbar {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 18px;
+    padding: 20px 5%;
+    position: relative;
+  }
+
+  .navbar ul {
+    flex-direction: column;
+    gap: 12px;
+    width: 100%;
+  }
+
+  .navbar a {
+    font-size: 14px;
+  }
+
+  .hero h1 {
+    font-size: 36px;
+  }
+
+  .hero p {
+    font-size: 15px;
+  }
+
+  .btn-koleksi {
+    padding: 12px 20px;
+    font-size: 14px;
+  }
+
+  .product-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .store {
+    padding: 60px 4%;
+  }
+
+  .card img {
+    height: 260px;
+  }
+
+  .card button {
+    width: 100%;
+  }
+}
